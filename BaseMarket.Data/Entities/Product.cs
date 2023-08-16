@@ -29,5 +29,7 @@ namespace BaseMarket.Data.Entities
         public string MetaDes { get; set; }
         public string MetaKey { get; set; }
         public int UnitStock { get; set; }
+        public List<ProductInCategory> ProductInCategories { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }

@@ -25,5 +25,7 @@ namespace BaseMarket.Data.Entities
         public string SchemaMarkup { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
+        public string Cover { get; set; }
+        public List<ProductInCategory> ProductInCategories { get; set; }
     }
 }

@@ -8,5 +8,7 @@ namespace BaseMarket.Data.Enum
 {
     public enum Paid
     {
+        Paid,
+        UnPaid
     }
 }

@@ -6,5 +6,6 @@
 - Microsoft.entityframeworkcore.design
 - Microsoft.entityframeworkcore.sqlserver
 - Microsoft.entityframeworkcore.tools
+- Microsoft.aspnetcore.identity.entityframeworkcore
 ## How to configure and run
 ## How to contribute

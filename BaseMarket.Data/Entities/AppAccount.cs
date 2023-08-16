@@ -10,6 +10,7 @@ namespace BaseMarket.Data.Entities
 {
     public class AppAccount : IdentityUser<Guid>
     {
+
         public string? Fullname { get; set; }
         public string Token { get; set; }
         public Active Active { get; set; }

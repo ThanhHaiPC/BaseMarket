@@ -17,5 +17,6 @@ namespace BaseMarket.Data.Entities
         public DateTime PaymentDate { get; set; }
         public string ShippingAddress { get; set; }
         public string Note { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
     }
 }

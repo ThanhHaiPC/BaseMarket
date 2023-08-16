@@ -10,6 +10,7 @@ namespace BaseMarket.Data.Entities
     public class Customer
     {
         public int CustomerID { get; set; }
+        public int LocationID { get; set; }
         public string FullName { get; set; }
         public DateTime Birthday { get; set; }
         public string Avatar { get; set; }
@@ -25,5 +26,7 @@ namespace BaseMarket.Data.Entities
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
         public DateTime LastLogin { get; set; }
+
+        public Location Location { get; set; }
     }
 }
