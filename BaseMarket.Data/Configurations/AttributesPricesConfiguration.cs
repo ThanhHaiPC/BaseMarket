@@ -24,12 +24,12 @@ namespace BaseMarket.Data.Configurations
 
             builder.Property(e => e.Price).IsRequired(); // Bắt buộc phải có giá
 
-            builder.Property(x => x.Active).HasDefaultValue(Active.Active); 
+            builder.Property(x => x.Active).HasDefaultValue(Active.Active);
 
-            builder.HasOne(e => e.Attributes)
-              .WithMany()
-              .HasForeignKey(e => e.AttributeID)
-              .OnDelete(DeleteBehavior.Restrict); // Liên kết với Attributes, không xóa liên quan
+
+            builder.HasOne(x => x.Product).WithMany(x => x.AttributesPrices).HasForeignKey(x => x.ProductID);
+
+            builder.HasOne(x => x.Attributes).WithMany(x => x.AttributesPrices).HasForeignKey(x => x.AttributeID);
         }
     }
 }

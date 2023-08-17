@@ -66,6 +66,12 @@ namespace BaseMarket.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppUserClaims", x => x.Id);
+                    table.ForeignKey(
+                       name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                       column: x => x.UserId,
+                       principalTable: "AspNetUsers",
+                       principalColumn: "Id",
+                       onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,6 +86,13 @@ namespace BaseMarket.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppUserLogins", x => x.UserId);
+                    table.ForeignKey(
+                       name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                       column: x => x.UserId,
+                       principalTable: "AspNetUsers",
+                       principalColumn: "Id",
+                       onDelete: ReferentialAction.Cascade);
+
                 });
 
             migrationBuilder.CreateTable(

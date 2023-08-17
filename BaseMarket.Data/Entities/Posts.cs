@@ -23,5 +23,6 @@ namespace BaseMarket.Data.Entities
         public string MetaDes { get; set; }
         public string MetaKey { get; set; }
         public int Views { get; set; }
+        public List<Comment> Comment { get; set; }
     }
 }

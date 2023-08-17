@@ -18,5 +18,8 @@ namespace BaseMarket.Data.Entities
         public Active Active { get; set; }
 
         public Attributes Attributes { get; set; }
+
+        public Product Product { get; set; }
+
     }
 }

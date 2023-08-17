@@ -21,13 +21,8 @@ namespace BaseMarket.Data.Configurations
 
             builder.Property(e => e.CreateDate).IsRequired(); // Ngày tạo, bắt buộc
 
-            // Khóa ngoại liên kết đến Post
-            builder.HasOne(e => e.Posts)
-                .WithMany()
-                .HasForeignKey(e => e.PostID)
-                .OnDelete(DeleteBehavior.Cascade); // Liên kết với Post, xóa liên quan khi Post bị xóa
+            builder.HasOne(x => x.Posts).WithMany(x => x.Comment).HasForeignKey(x => x.PostID);
 
-           
             builder.HasOne(x => x.AppUser).WithMany(x => x.Comments).HasForeignKey(x => x.UserID);
 
         }

@@ -31,5 +31,7 @@ namespace BaseMarket.Data.Entities
         public int UnitStock { get; set; }
         public List<ProductInCategory> ProductInCategories { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
+        public List<AttributesPrices> AttributesPrices { get; set; }
+        public List<Rating> Ratings { get; set; }
     }
 }

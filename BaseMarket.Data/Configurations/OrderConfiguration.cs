@@ -17,7 +17,9 @@ namespace BaseMarket.Data.Configurations
 
             builder.HasKey(x => x.OrderID);
 
+            builder.HasOne(x => x.TransactStatus).WithMany().HasForeignKey(x => x.TransactStatusID);
 
+            builder.HasOne(x => x.AppUser).WithMany().HasForeignKey(x => x.UserID);
         }
     }
 }

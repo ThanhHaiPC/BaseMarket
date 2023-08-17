@@ -26,11 +26,8 @@ namespace BaseMarket.Data.Configurations
           
             builder.HasOne(x => x.AppUser).WithMany(x => x.Ratings).HasForeignKey(x => x.UserID);
 
-            // Khóa ngoại liên kết đến Product
-            builder.HasOne(e => e.Product)
-                .WithMany()
-                .HasForeignKey(e => e.ProductID)
-                .OnDelete(DeleteBehavior.Restrict); // Liên kết với Product, không xóa liên quan
+            builder.HasOne(x => x.Product).WithMany(x => x.Ratings).HasForeignKey(x => x.ProductID);
+
         }
     }
 }

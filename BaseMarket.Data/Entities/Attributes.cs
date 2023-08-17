@@ -10,5 +10,6 @@ namespace BaseMarket.Data.Entities
     {
         public int AttributeID { get; set; }
         public string Name { get; set; }
+        public List<AttributesPrices> AttributesPrices { get; set; }
     }
 }
