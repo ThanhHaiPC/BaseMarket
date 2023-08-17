@@ -28,11 +28,11 @@ namespace BaseMarket.Data.Configurations
                 .OnDelete(DeleteBehavior.Cascade); // Liên kết với Post, xóa liên quan khi Post bị xóa
 
             // Khóa ngoại liên kết đến Customer
-            builder.HasOne(e => e.Customer)
+            builder.HasOne(e => e.AppUser)
                 .WithMany()
-                .HasForeignKey(e => e.CustomerID)
+                .HasForeignKey(e => e.UserID)
                 .OnDelete(DeleteBehavior.Restrict); // Liên kết với Customer, không xóa liên quan
-        });
+       
         }
     }
 }

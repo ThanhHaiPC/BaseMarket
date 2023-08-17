@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BaseMarket.Data.EF
 {
-    public class MarketDbContext : IdentityDbContext<AppAccount, AppRole, Guid>
+    public class MarketDbContext : IdentityDbContext<AppUser, AppRole, Guid>
     {
         public MarketDbContext(DbContextOptions options) : base(options)
         {
@@ -25,7 +25,7 @@ namespace BaseMarket.Data.EF
 
             modelBuilder.ApplyConfiguration(new ProductInCategoryConfiguration());
 
-            modelBuilder.ApplyConfiguration(new AppAccountConfiguration());
+            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
 
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
 
@@ -34,8 +34,6 @@ namespace BaseMarket.Data.EF
             modelBuilder.ApplyConfiguration(new AttributesPricesConfiguration());
 
             modelBuilder.ApplyConfiguration(new CommentConfiguration());
-
-            modelBuilder.ApplyConfiguration(new CustomerConfiguration());
 
             modelBuilder.ApplyConfiguration(new LocationConfiguration());
 
@@ -61,8 +59,7 @@ namespace BaseMarket.Data.EF
         public DbSet<Category> Categories { get; set; }
         public DbSet<Attributes> Attributes { get; set; }
         public DbSet<AttributesPrices> AttributesPrices { get; set; }
-        public DbSet<Comment> Comments { get; set; }
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Comment> Comments { get; set; }      
         public DbSet<Order> Orders { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Shipper> Shippers { get; set; }

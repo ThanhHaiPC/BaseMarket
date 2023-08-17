@@ -9,13 +9,13 @@ namespace BaseMarket.Data.Entities
     public class Rating
     {
         public int RatingID { get; set; }
-        public int CustomerID { get; set; }
+        public Guid UserID { get; set; }
         public int ProductID { get; set; }
         public int Stars { get; set; }
         public string Comment { get; set; }
         public DateTime CreateDate { get; set; }
-        
-        public Customer Customer { get; set; }
+
+        public AppUser AppUser { get; set; }
 
         public Product Product { get; set; }
     }

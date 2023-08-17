@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BaseMarket.Data.Entities
 {
-    public class AppAccount : IdentityUser<Guid>
+    public class AppUser : IdentityUser<Guid>
     {
-
+        public int LocationID { get; set; }
         public string? Fullname { get; set; }
         public string Token { get; set; }
         public Active Active { get; set; }
@@ -18,5 +18,13 @@ namespace BaseMarket.Data.Entities
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
         public DateTime LastLogin { get; set; }
+        public string Avatar { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string Distric { get; set; }
+        public string Ward { get; set; }
+        public string City { get; set; }
+        public string Password { get; set; }
+        public Location Location { get; set; }
     }
 }

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace BaseMarket.Data.Configurations
 {
-    internal class AppAccountConfiguration : IEntityTypeConfiguration<AppAccount>
+    internal class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
     {
-        public void Configure(EntityTypeBuilder<AppAccount> builder)
+        public void Configure(EntityTypeBuilder<AppUser> builder)
         {
-            builder.ToTable("AppAccount");
+            builder.ToTable("AppUser");
             // Khóa chính
             builder.HasKey(x => x.Id);
             // Sinh tự động giá trị cho khóa chính
@@ -31,7 +31,25 @@ namespace BaseMarket.Data.Configurations
             // Bắt buộc phải có UpdateDate
             builder.Property(e => e.UpdateDate).IsRequired();
             // Bắt buộc phải có LastLogin
-            builder.Property(e => e.LastLogin).IsRequired(); 
+            builder.Property(e => e.LastLogin).IsRequired();
+            // Avatar, bắt buộc
+            builder.Property(e => e.Avatar).IsRequired(); 
+            // Email, bắt buộc
+            builder.Property(e => e.Email).IsRequired();
+            // Số điện thoại, bắt buộc
+            builder.Property(e => e.Phone).IsRequired();
+            // Quận/huyện, bắt buộc
+            builder.Property(e => e.Distric).IsRequired();
+            // Phường/xã, bắt buộc
+            builder.Property(e => e.Ward).IsRequired();
+            // Thành phố, bắt buộc
+            builder.Property(e => e.City).IsRequired();
+            // Mật khẩu, bắt buộc
+            builder.Property(e => e.Password).IsRequired();
+
+            builder.HasOne(e => e.Location)
+                .WithMany()
+                .HasForeignKey(e => e.LocationID);
         }
     }
 }

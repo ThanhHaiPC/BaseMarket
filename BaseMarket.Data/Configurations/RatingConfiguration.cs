@@ -24,9 +24,9 @@ namespace BaseMarket.Data.Configurations
             builder.Property(e => e.CreateDate).IsRequired(); // Ngày tạo, bắt buộc
 
             // Khóa ngoại liên kết đến Customer
-            builder.HasOne(e => e.Customer)
+            builder.HasOne(e => e.AppUser)
                 .WithMany()
-                .HasForeignKey(e => e.CustomerID)
+                .HasForeignKey(e => e.UserID)
                 .OnDelete(DeleteBehavior.Restrict); // Liên kết với Customer, không xóa liên quan
 
             // Khóa ngoại liên kết đến Product
