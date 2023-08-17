@@ -10,6 +10,7 @@ namespace BaseMarket.Data.Entities
     public class Order
     {
         public int OrderID { get; set; }
+        public int TransactStatusID { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime ShipDate { get; set; }
         public Deleted Deleted { get; set; }

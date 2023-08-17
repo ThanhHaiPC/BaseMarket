@@ -1,5 +1,6 @@
 ﻿using BaseMarket.Data.Configurations;
 using BaseMarket.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -52,6 +53,13 @@ namespace BaseMarket.Data.EF
             modelBuilder.ApplyConfiguration(new StatisticConfiguration());
 
             modelBuilder.ApplyConfiguration(new TransactStatusConfiguration());
+
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.UserId, x.RoleId });
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
+
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
+            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
 
             /*  base.OnModelCreating(modelBuilder);*/
         }

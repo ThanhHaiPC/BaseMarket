@@ -7,5 +7,8 @@
 - Microsoft.entityframeworkcore.sqlserver
 - Microsoft.entityframeworkcore.tools
 - Microsoft.aspnetcore.identity.entityframeworkcore
+- Microsoft.extensions.configuration.fileextensions
+- Microsoft.aspnetcore.identity.entityframeworkcore
+- Microsoft.extensions.configuration.json
 ## How to configure and run
 ## How to contribute

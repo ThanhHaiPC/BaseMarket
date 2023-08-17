@@ -9,15 +9,11 @@ using System.Threading.Tasks;
 
 namespace BaseMarket.Data.Configurations
 {
-    internal class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
+    class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
     {
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
             builder.ToTable("AppUser");
-            // Khóa chính
-            builder.HasKey(x => x.Id);
-            // Sinh tự động giá trị cho khóa chính
-            builder.Property(x=>x.Id).ValueGeneratedOnAdd();
             // Giới hạn độ dài Fullname
             builder.Property(x => x.Fullname).HasMaxLength(100);
             // Bắt buộc phải có Token
@@ -47,9 +43,7 @@ namespace BaseMarket.Data.Configurations
             // Mật khẩu, bắt buộc
             builder.Property(e => e.Password).IsRequired();
 
-            builder.HasOne(e => e.Location)
-                .WithMany()
-                .HasForeignKey(e => e.LocationID);
+          
         }
     }
 }

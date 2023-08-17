@@ -13,11 +13,7 @@ namespace BaseMarket.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<AppRole> builder)
         {
-            builder.ToTable("AppRole");
-
-            builder.HasKey(x => x.Id);
-
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.ToTable("AppRole");       
 
             builder.Property(x =>x.Name).IsRequired().HasMaxLength(100);
 

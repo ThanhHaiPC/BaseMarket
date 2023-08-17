@@ -10,7 +10,7 @@ namespace BaseMarket.Data.Entities
 {
     public class AppUser : IdentityUser<Guid>
     {
-        public int LocationID { get; set; }
+      
         public string? Fullname { get; set; }
         public string Token { get; set; }
         public Active Active { get; set; }
@@ -26,5 +26,7 @@ namespace BaseMarket.Data.Entities
         public string City { get; set; }
         public string Password { get; set; }
         public Location Location { get; set; }
+        public List<Rating> Ratings { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }

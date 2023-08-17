@@ -27,12 +27,9 @@ namespace BaseMarket.Data.Configurations
                 .HasForeignKey(e => e.PostID)
                 .OnDelete(DeleteBehavior.Cascade); // Liên kết với Post, xóa liên quan khi Post bị xóa
 
-            // Khóa ngoại liên kết đến Customer
-            builder.HasOne(e => e.AppUser)
-                .WithMany()
-                .HasForeignKey(e => e.UserID)
-                .OnDelete(DeleteBehavior.Restrict); // Liên kết với Customer, không xóa liên quan
-       
+           
+            builder.HasOne(x => x.AppUser).WithMany(x => x.Comments).HasForeignKey(x => x.UserID);
+
         }
     }
 }
