@@ -1,5 +1,6 @@
 ﻿using BaseMarket.Data.Configurations;
 using BaseMarket.Data.Entities;
+using BaseMarket.Data.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -17,7 +18,8 @@ namespace BaseMarket.Data.EF
         {
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {;
+        {
+            // Configure using Fluent API
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
 
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
@@ -54,6 +56,10 @@ namespace BaseMarket.Data.EF
 
             modelBuilder.ApplyConfiguration(new TransactStatusConfiguration());
 
+            //Data seeding 
+            modelBuilder.Seed();
+           
+
             modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
             modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.UserId, x.RoleId });
             modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
@@ -65,6 +71,7 @@ namespace BaseMarket.Data.EF
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<ProductInCategory> ProductInCategories { get; set; }
         public DbSet<Attributes> Attributes { get; set; }
         public DbSet<AttributesPrices> AttributesPrices { get; set; }
         public DbSet<Comment> Comments { get; set; }      

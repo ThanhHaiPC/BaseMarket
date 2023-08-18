@@ -8,6 +8,7 @@ namespace BaseMarket.Data.Enum
 {
     public enum HomeFlag
     {
-
+        Press,
+        Notimpressed
     }
 }

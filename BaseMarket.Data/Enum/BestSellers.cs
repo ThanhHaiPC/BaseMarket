@@ -8,6 +8,8 @@ namespace BaseMarket.Data.Enum
 {
     public enum BestSellers
     {
+        Yes,
+        No
         /* Vegetable,
          Fruit,
          Seafood,

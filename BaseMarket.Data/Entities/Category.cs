@@ -12,7 +12,7 @@ namespace BaseMarket.Data.Entities
         public int CategoryID { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }
-        public int ParentID { get; set; }
+        public int? ParentID { get; set; }
         public int Levels { get; set; }
         public Active Active { get; set; }
         public int DisplayOrder { get; set; }
