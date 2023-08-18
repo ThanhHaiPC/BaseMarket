@@ -49,6 +49,11 @@ namespace BaseMarket.Data.Migrations
                 table: "Product",
                 keyColumn: "ProductID",
                 keyValue: 2);
+
+           /* migrationBuilder.DeleteData(
+             table: "Product",
+             keyColumn: "ProductID",
+             keyValue: 2);*/
         }
     }
 }

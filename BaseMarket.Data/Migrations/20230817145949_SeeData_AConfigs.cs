@@ -75,6 +75,11 @@ namespace BaseMarket.Data.Migrations
                 keyColumn: "Key",
                 keyValue: "Home Keyword");
 
+           /* migrationBuilder.DeleteData(
+                table: "AppConfigs",
+                keyColumn: "Key",
+                keyValue: "Home Keyword");
+*/
             migrationBuilder.DeleteData(
                 table: "AppConfigs",
                 keyColumn: "Key",
