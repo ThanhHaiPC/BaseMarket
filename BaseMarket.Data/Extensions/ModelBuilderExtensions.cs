@@ -1,6 +1,9 @@
 ﻿using BaseMarket.Data.Entities;
 using BaseMarket.Data.Enum;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +27,7 @@ namespace BaseMarket.Data.Extensions
                     CategoryID = 1,
                     CategoryName = "Hoa quả",
                     Description = "Hoa quả mới nhập về rất ngon",
-                    ParentID = null,
+                    ParentID = 0,
                     Levels = 2,
                     DisplayOrder = 2,
                     Active = Active.Active,
@@ -41,10 +44,10 @@ namespace BaseMarket.Data.Extensions
                 },
                  new Category()
                  {
-                     CategoryID = 1,
+                     CategoryID = 2,
                      CategoryName = "Thịt ",
                      Description = "Thịt mới nhập về rất ngon",
-                     ParentID = null,
+                     ParentID = 0,
                      Levels = 1,
                      DisplayOrder = 1,
                      Active = Active.Active,
@@ -108,6 +111,53 @@ namespace BaseMarket.Data.Extensions
                    UnitStock = 20,
                }         
                ) ;
+         /*   // any guid
+            var roleId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
+            var adminId = new Guid("C1B3EFBD-1E1F-47B5-B5D6-9062046F0166");
+            var hasher = new PasswordHasher<AppUser>();
+            modelBuilder.Entity<AppRole>().HasData(new AppRole
+            {
+                Id = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC"),
+                Name = "admin",
+                NormalizedName = "admin",
+                ShortDesc = "Administrator role",
+                CreateDate = new DateTime(2023, 08, 18),
+                UpdateDate = new DateTime(2023, 08, 18),
+            });
+
+            
+            modelBuilder.Entity<AppUser>().HasData(new AppUser
+            {
+                Id = new Guid("C1B3EFBD-1E1F-47B5-B5D6-9062046F0166"),
+                UserName = "admin",
+                NormalizedUserName = "admin",
+                Email = "ThanhHaiPC2002@gmail.com",
+                NormalizedEmail = "ThanhHaiPC2002@gmail.com",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "Abcd1234$"),
+                SecurityStamp = string.Empty,
+                Fullname = "Phạm Thanh Hải",
+                Avatar = "",
+                Phone = "0967021502",
+                Address = "Biên Hòa Đồng Nai",
+                CreateDate = new DateTime(2023, 08, 18),
+                UpdateDate = new DateTime(2023, 08, 18),
+                LastLogin = new DateTime(2023, 08, 18),
+                Distric = "",
+                Ward = "",
+                City = "",
+                Password = "",
+                Token = "123456",
+                Active = Active.Active,
+
+            }); ;
+
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+            {
+                RoleId = roleId,
+                UserId = adminId
+            });*/
+
         }
     }
 }

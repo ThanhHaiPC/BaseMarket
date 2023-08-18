@@ -34,6 +34,23 @@ namespace BaseMarket.Data.Migrations
                     b.HasKey("Key");
 
                     b.ToTable("AppConfigs", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Key = "Home Title",
+                            Value = "This is home page of Web Market Online 1"
+                        },
+                        new
+                        {
+                            Key = "Home Keyword",
+                            Value = "This is keyword of Web Market Online  1 "
+                        },
+                        new
+                        {
+                            Key = "Home Description",
+                            Value = "This is description of Web Market Online 1 "
+                        });
                 });
 
             modelBuilder.Entity("BaseMarket.Data.Entities.AppRole", b =>
@@ -221,6 +238,8 @@ namespace BaseMarket.Data.Migrations
 
                     b.HasIndex("AttributeID");
 
+                    b.HasIndex("ProductID");
+
                     b.ToTable("AttributesPrices", (string)null);
                 });
 
@@ -278,7 +297,8 @@ namespace BaseMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ParentID")
+                    b.Property<int?>("ParentID")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("SchemaMarkup")
@@ -295,6 +315,48 @@ namespace BaseMarket.Data.Migrations
                     b.HasKey("CategoryID");
 
                     b.ToTable("Category", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            Active = 1,
+                            Alias = "hoa-qua",
+                            CategoryName = "Hoa quả",
+                            Cover = "",
+                            CreateDate = new DateTime(2023, 8, 17, 21, 59, 49, 141, DateTimeKind.Local).AddTicks(8483),
+                            Description = "Hoa quả mới nhập về rất ngon",
+                            DisplayOrder = 2,
+                            Image = "",
+                            Levels = 2,
+                            MetaDes = "Hoa quả rất ngọt và ngon",
+                            MetaKey = "",
+                            MetaTitle = "Hoa quả rất ngọt và ngon",
+                            ParentID = 0,
+                            SchemaMarkup = "",
+                            Title = "",
+                            UpdateDate = new DateTime(2023, 8, 17, 21, 59, 49, 141, DateTimeKind.Local).AddTicks(8493)
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            Active = 1,
+                            Alias = "thit",
+                            CategoryName = "Thịt ",
+                            Cover = "",
+                            CreateDate = new DateTime(2023, 8, 17, 21, 59, 49, 141, DateTimeKind.Local).AddTicks(8496),
+                            Description = "Thịt mới nhập về rất ngon",
+                            DisplayOrder = 1,
+                            Image = "",
+                            Levels = 1,
+                            MetaDes = "Thịt rất ngon và tốt cho sức khỏe ",
+                            MetaKey = "",
+                            MetaTitle = "Thịt rất ngon và tốt cho sức khỏe ",
+                            ParentID = 0,
+                            SchemaMarkup = "",
+                            Title = "",
+                            UpdateDate = new DateTime(2023, 8, 17, 21, 59, 49, 141, DateTimeKind.Local).AddTicks(8496)
+                        });
                 });
 
             modelBuilder.Entity("BaseMarket.Data.Entities.Comment", b =>
@@ -417,7 +479,17 @@ namespace BaseMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TransactStatusID")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("OrderID");
+
+                    b.HasIndex("TransactStatusID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Order", (string)null);
                 });
@@ -681,6 +753,54 @@ namespace BaseMarket.Data.Migrations
                     b.HasKey("ProductID");
 
                     b.ToTable("Product", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ProductID = 1,
+                            Active = 1,
+                            Alias = "hoa-qua",
+                            BestSellers = 0,
+                            CreateDate = new DateTime(2023, 8, 17, 21, 59, 49, 141, DateTimeKind.Local).AddTicks(8512),
+                            Description = "Trái táo giòn tan",
+                            Discount = 5000,
+                            HomeFlag = 0,
+                            Image = "",
+                            MetaDes = "Hoa quả rất ngọt và ngon",
+                            MetaKey = "",
+                            MetaTitle = "Hoa quả rất ngọt và ngon",
+                            Price = 15000,
+                            ProductName = "Trái táo",
+                            ShortDesc = "Trái táo giòn tan",
+                            Tags = "",
+                            Title = "",
+                            UnitStock = 50,
+                            UpdateDate = new DateTime(2023, 8, 17, 21, 59, 49, 141, DateTimeKind.Local).AddTicks(8512),
+                            Video = ""
+                        },
+                        new
+                        {
+                            ProductID = 2,
+                            Active = 1,
+                            Alias = "hoa-qua",
+                            BestSellers = 0,
+                            CreateDate = new DateTime(2023, 8, 17, 21, 59, 49, 141, DateTimeKind.Local).AddTicks(8515),
+                            Description = "Trái xoài giòn tan",
+                            Discount = 5000,
+                            HomeFlag = 0,
+                            Image = "",
+                            MetaDes = "Hoa quả rất ngọt và ngon",
+                            MetaKey = "",
+                            MetaTitle = "Hoa quả rất ngọt và ngon",
+                            Price = 30000,
+                            ProductName = "Trái xoài",
+                            ShortDesc = "Trái xoài giòn tan",
+                            Tags = "",
+                            Title = "",
+                            UnitStock = 20,
+                            UpdateDate = new DateTime(2023, 8, 17, 21, 59, 49, 141, DateTimeKind.Local).AddTicks(8516),
+                            Video = ""
+                        });
                 });
 
             modelBuilder.Entity("BaseMarket.Data.Entities.ProductInCategory", b =>
@@ -935,18 +1055,26 @@ namespace BaseMarket.Data.Migrations
             modelBuilder.Entity("BaseMarket.Data.Entities.AttributesPrices", b =>
                 {
                     b.HasOne("BaseMarket.Data.Entities.Attributes", "Attributes")
-                        .WithMany()
+                        .WithMany("AttributesPrices")
                         .HasForeignKey("AttributeID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BaseMarket.Data.Entities.Product", "Product")
+                        .WithMany("AttributesPrices")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Attributes");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("BaseMarket.Data.Entities.Comment", b =>
                 {
                     b.HasOne("BaseMarket.Data.Entities.Posts", "Posts")
-                        .WithMany()
+                        .WithMany("Comment")
                         .HasForeignKey("PostID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -960,6 +1088,25 @@ namespace BaseMarket.Data.Migrations
                     b.Navigation("AppUser");
 
                     b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("BaseMarket.Data.Entities.Order", b =>
+                {
+                    b.HasOne("BaseMarket.Data.Entities.TransactStatus", "TransactStatus")
+                        .WithMany()
+                        .HasForeignKey("TransactStatusID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BaseMarket.Data.Entities.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("TransactStatus");
                 });
 
             modelBuilder.Entity("BaseMarket.Data.Entities.OrderDetail", b =>
@@ -1003,9 +1150,9 @@ namespace BaseMarket.Data.Migrations
             modelBuilder.Entity("BaseMarket.Data.Entities.Rating", b =>
                 {
                     b.HasOne("BaseMarket.Data.Entities.Product", "Product")
-                        .WithMany()
+                        .WithMany("Ratings")
                         .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BaseMarket.Data.Entities.AppUser", "AppUser")
@@ -1026,6 +1173,11 @@ namespace BaseMarket.Data.Migrations
                     b.Navigation("Ratings");
                 });
 
+            modelBuilder.Entity("BaseMarket.Data.Entities.Attributes", b =>
+                {
+                    b.Navigation("AttributesPrices");
+                });
+
             modelBuilder.Entity("BaseMarket.Data.Entities.Category", b =>
                 {
                     b.Navigation("ProductInCategories");
@@ -1036,11 +1188,20 @@ namespace BaseMarket.Data.Migrations
                     b.Navigation("OrderDetails");
                 });
 
+            modelBuilder.Entity("BaseMarket.Data.Entities.Posts", b =>
+                {
+                    b.Navigation("Comment");
+                });
+
             modelBuilder.Entity("BaseMarket.Data.Entities.Product", b =>
                 {
+                    b.Navigation("AttributesPrices");
+
                     b.Navigation("OrderDetails");
 
                     b.Navigation("ProductInCategories");
+
+                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }
