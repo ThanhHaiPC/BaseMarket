@@ -111,7 +111,7 @@ namespace BaseMarket.Data.Extensions
                    UnitStock = 20,
                }         
                ) ;
-         /*   // any guid
+            // any guid
             var roleId = new Guid("8D04DCE2-969A-435D-BBA4-DF3F325983DC");
             var adminId = new Guid("C1B3EFBD-1E1F-47B5-B5D6-9062046F0166");
             var hasher = new PasswordHasher<AppUser>();
@@ -125,7 +125,7 @@ namespace BaseMarket.Data.Extensions
                 UpdateDate = new DateTime(2023, 08, 18),
             });
 
-            
+
             modelBuilder.Entity<AppUser>().HasData(new AppUser
             {
                 Id = new Guid("C1B3EFBD-1E1F-47B5-B5D6-9062046F0166"),
@@ -143,12 +143,7 @@ namespace BaseMarket.Data.Extensions
                 CreateDate = new DateTime(2023, 08, 18),
                 UpdateDate = new DateTime(2023, 08, 18),
                 LastLogin = new DateTime(2023, 08, 18),
-                Distric = "",
-                Ward = "",
-                City = "",
-                Password = "",
-                Token = "123456",
-                Active = Active.Active,
+               
 
             }); ;
 
@@ -156,7 +151,7 @@ namespace BaseMarket.Data.Extensions
             {
                 RoleId = roleId,
                 UserId = adminId
-            });*/
+            });
 
         }
     }

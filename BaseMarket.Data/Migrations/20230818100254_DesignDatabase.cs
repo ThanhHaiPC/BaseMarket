@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BaseMarket.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class DesignDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,6 +54,38 @@ namespace BaseMarket.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppUser",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Fullname = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastLogin = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUser", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AppUserClaims",
                 columns: table => new
                 {
@@ -66,12 +98,6 @@ namespace BaseMarket.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppUserClaims", x => x.Id);
-                    table.ForeignKey(
-                       name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                       column: x => x.UserId,
-                       principalTable: "AspNetUsers",
-                       principalColumn: "Id",
-                       onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,13 +112,6 @@ namespace BaseMarket.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppUserLogins", x => x.UserId);
-                    table.ForeignKey(
-                       name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                       column: x => x.UserId,
-                       principalTable: "AspNetUsers",
-                       principalColumn: "Id",
-                       onDelete: ReferentialAction.Cascade);
-
                 });
 
             migrationBuilder.CreateTable(
@@ -160,47 +179,6 @@ namespace BaseMarket.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.CategoryID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Locations",
-                columns: table => new
-                {
-                    LocationID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    NameWithType = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    PathWithType = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    ParentCode = table.Column<int>(type: "int", nullable: false),
-                    Levels = table.Column<int>(type: "int", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Province = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Slug = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Locations", x => x.LocationID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Order",
-                columns: table => new
-                {
-                    OrderID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ShipDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Deleted = table.Column<int>(type: "int", nullable: false),
-                    Paid = table.Column<int>(type: "int", nullable: false),
-                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ShippingAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Order", x => x.OrderID);
                 });
 
             migrationBuilder.CreateTable(
@@ -333,6 +311,62 @@ namespace BaseMarket.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Locations",
+                columns: table => new
+                {
+                    LocationID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    NameWithType = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    PathWithType = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    ParentCode = table.Column<int>(type: "int", nullable: false),
+                    Levels = table.Column<int>(type: "int", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Province = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Slug = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    AppUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Locations", x => x.LocationID);
+                    table.ForeignKey(
+                        name: "FK_Locations_AppUser_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AppUser",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    CommentID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PostID = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Contents = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.CommentID);
+                    table.ForeignKey(
+                        name: "FK_Comments_AppUser_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AppUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Comments_Posts_PostID",
+                        column: x => x.PostID,
+                        principalTable: "Posts",
+                        principalColumn: "PostID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AttributesPrices",
                 columns: table => new
                 {
@@ -351,51 +385,98 @@ namespace BaseMarket.Data.Migrations
                         column: x => x.AttributeID,
                         principalTable: "Attributes",
                         principalColumn: "AttributeID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AttributesPrices_Product_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Product",
+                        principalColumn: "ProductID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppUser",
+                name: "ProductInCategory",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Fullname = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    Token = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Active = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastLogin = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Distric = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Ward = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LocationID = table.Column<int>(type: "int", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                    ProductID = table.Column<int>(type: "int", nullable: false),
+                    CategoryID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppUser", x => x.Id);
+                    table.PrimaryKey("PK_ProductInCategory", x => new { x.CategoryID, x.ProductID });
                     table.ForeignKey(
-                        name: "FK_AppUser_Locations_LocationID",
-                        column: x => x.LocationID,
-                        principalTable: "Locations",
-                        principalColumn: "LocationID",
+                        name: "FK_ProductInCategory_Category_CategoryID",
+                        column: x => x.CategoryID,
+                        principalTable: "Category",
+                        principalColumn: "CategoryID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductInCategory_Product_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Product",
+                        principalColumn: "ProductID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ratings",
+                columns: table => new
+                {
+                    RatingID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductID = table.Column<int>(type: "int", nullable: false),
+                    Stars = table.Column<int>(type: "int", nullable: false),
+                    Comment = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ratings", x => x.RatingID);
+                    table.ForeignKey(
+                        name: "FK_Ratings_AppUser_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AppUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ratings_Product_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Product",
+                        principalColumn: "ProductID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    OrderID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TransactStatusID = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ShipDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Deleted = table.Column<int>(type: "int", nullable: false),
+                    Paid = table.Column<int>(type: "int", nullable: false),
+                    PaymentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ShippingAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.OrderID);
+                    table.ForeignKey(
+                        name: "FK_Order_AppUser_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AppUser",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Order_TransactStatuses_TransactStatusID",
+                        column: x => x.TransactStatusID,
+                        principalTable: "TransactStatuses",
+                        principalColumn: "TransactStatusID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -430,96 +511,43 @@ namespace BaseMarket.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ProductInCategory",
-                columns: table => new
+            migrationBuilder.InsertData(
+                table: "AppConfigs",
+                columns: new[] { "Key", "Value" },
+                values: new object[,]
                 {
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    CategoryID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductInCategory", x => new { x.CategoryID, x.ProductID });
-                    table.ForeignKey(
-                        name: "FK_ProductInCategory_Category_CategoryID",
-                        column: x => x.CategoryID,
-                        principalTable: "Category",
-                        principalColumn: "CategoryID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductInCategory_Product_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Product",
-                        principalColumn: "ProductID",
-                        onDelete: ReferentialAction.Cascade);
+                    { "HomeDescription", "This is description page of MarketOnline" },
+                    { "HomeKeyword", "This is keyword page of MarketOnline" },
+                    { "HomeTitle", "This is home page of MarketOnline" }
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "CategoryID", "Active", "Alias", "CategoryName", "Cover", "CreateDate", "Description", "DisplayOrder", "Image", "Levels", "MetaDes", "MetaKey", "MetaTitle", "ParentID", "SchemaMarkup", "Title", "UpdateDate" },
+                values: new object[,]
                 {
-                    CommentID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PostID = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Contents = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.CommentID);
-                    table.ForeignKey(
-                        name: "FK_Comments_AppUser_UserID",
-                        column: x => x.UserID,
-                        principalTable: "AppUser",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Comments_Posts_PostID",
-                        column: x => x.PostID,
-                        principalTable: "Posts",
-                        principalColumn: "PostID",
-                        onDelete: ReferentialAction.Cascade);
+                    { 1, 1, "hoa-qua", "Hoa quả", "", new DateTime(2023, 8, 18, 17, 2, 54, 109, DateTimeKind.Local).AddTicks(337), "Hoa quả mới nhập về rất ngon", 2, "", 2, "Hoa quả rất ngọt và ngon", "", "Hoa quả rất ngọt và ngon", 0, "", "", new DateTime(2023, 8, 18, 17, 2, 54, 109, DateTimeKind.Local).AddTicks(347) },
+                    { 2, 1, "thit", "Thịt ", "", new DateTime(2023, 8, 18, 17, 2, 54, 109, DateTimeKind.Local).AddTicks(349), "Thịt mới nhập về rất ngon", 1, "", 1, "Thịt rất ngon và tốt cho sức khỏe ", "", "Thịt rất ngon và tốt cho sức khỏe ", 0, "", "", new DateTime(2023, 8, 18, 17, 2, 54, 109, DateTimeKind.Local).AddTicks(350) }
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Ratings",
-                columns: table => new
+            migrationBuilder.InsertData(
+                table: "Product",
+                columns: new[] { "ProductID", "Active", "Alias", "BestSellers", "CreateDate", "Description", "Discount", "HomeFlag", "Image", "MetaDes", "MetaKey", "MetaTitle", "Price", "ProductName", "ShortDesc", "Tags", "Title", "UnitStock", "UpdateDate", "Video" },
+                values: new object[,]
                 {
-                    RatingID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    Stars = table.Column<int>(type: "int", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Ratings", x => x.RatingID);
-                    table.ForeignKey(
-                        name: "FK_Ratings_AppUser_UserID",
-                        column: x => x.UserID,
-                        principalTable: "AppUser",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Ratings_Product_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Product",
-                        principalColumn: "ProductID",
-                        onDelete: ReferentialAction.Restrict);
+                    { 1, 1, "hoa-qua", 0, new DateTime(2023, 8, 18, 17, 2, 54, 109, DateTimeKind.Local).AddTicks(363), "Trái táo giòn tan", 5000, 0, "", "Hoa quả rất ngọt và ngon", "", "Hoa quả rất ngọt và ngon", 15000, "Trái táo", "Trái táo giòn tan", "", "", 50, new DateTime(2023, 8, 18, 17, 2, 54, 109, DateTimeKind.Local).AddTicks(364), "" },
+                    { 2, 1, "hoa-qua", 0, new DateTime(2023, 8, 18, 17, 2, 54, 109, DateTimeKind.Local).AddTicks(367), "Trái xoài giòn tan", 5000, 0, "", "Hoa quả rất ngọt và ngon", "", "Hoa quả rất ngọt và ngon", 30000, "Trái xoài", "Trái xoài giòn tan", "", "", 20, new DateTime(2023, 8, 18, 17, 2, 54, 109, DateTimeKind.Local).AddTicks(367), "" }
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AppUser_LocationID",
-                table: "AppUser",
-                column: "LocationID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AttributesPrices_AttributeID",
                 table: "AttributesPrices",
                 column: "AttributeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AttributesPrices_ProductID",
+                table: "AttributesPrices",
+                column: "ProductID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_PostID",
@@ -529,6 +557,21 @@ namespace BaseMarket.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_UserID",
                 table: "Comments",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Locations_AppUserId",
+                table: "Locations",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_TransactStatusID",
+                table: "Order",
+                column: "TransactStatusID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_UserID",
+                table: "Order",
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
@@ -582,6 +625,9 @@ namespace BaseMarket.Data.Migrations
                 name: "Comments");
 
             migrationBuilder.DropTable(
+                name: "Locations");
+
+            migrationBuilder.DropTable(
                 name: "OrderDetail");
 
             migrationBuilder.DropTable(
@@ -600,9 +646,6 @@ namespace BaseMarket.Data.Migrations
                 name: "Statistics");
 
             migrationBuilder.DropTable(
-                name: "TransactStatuses");
-
-            migrationBuilder.DropTable(
                 name: "Attributes");
 
             migrationBuilder.DropTable(
@@ -615,13 +658,13 @@ namespace BaseMarket.Data.Migrations
                 name: "Category");
 
             migrationBuilder.DropTable(
-                name: "AppUser");
-
-            migrationBuilder.DropTable(
                 name: "Product");
 
             migrationBuilder.DropTable(
-                name: "Locations");
+                name: "AppUser");
+
+            migrationBuilder.DropTable(
+                name: "TransactStatuses");
         }
     }
 }
