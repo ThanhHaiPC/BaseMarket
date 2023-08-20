@@ -6,9 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BaseMarket.Data\BaseMarket.Data.csproj" />
-    <ProjectReference Include="..\BaseMarket.Utillties\BaseMarket.Utillties.csproj" />
-  </ItemGroup>
-
 </Project>

@@ -1,4 +1,5 @@
 ﻿using BaseMarket.Application.Catalog.Products.DTOs;
+using BaseMarket.Application.Catalog.Products.DTOs.Public;
 using BaseMarket.Application.Dtos;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,6 @@ namespace BaseMarket.Application.Catalog.Products
 {
     public interface IPublicProductService
     {
-        public  PagedViewModel<ProductViewModel> GetAllByCategaryID(int categaryID, int pageIndex, int pageSize);
+        Task <PagedResult<ProductViewModel>> GetAllByCategaryID(GetProductPagingRequest request);
     }
 }

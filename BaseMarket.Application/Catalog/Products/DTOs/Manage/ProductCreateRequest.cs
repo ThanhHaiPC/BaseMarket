@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseMarket.Application.Catalog.Products.DTOs
+namespace BaseMarket.Application.Catalog.Products.DTOs.Manage
 {
-    public class ProductViewModel
+    public class ProductCreateRequest
     {
         public int ProductID { get; set; }
         public string ProductName { get; set; }
@@ -30,5 +30,4 @@ namespace BaseMarket.Application.Catalog.Products.DTOs
         public string MetaKey { get; set; }
         public int UnitStock { get; set; }
     }
-
 }
