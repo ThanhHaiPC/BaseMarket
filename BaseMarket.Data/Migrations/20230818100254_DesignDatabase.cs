@@ -244,8 +244,7 @@ namespace BaseMarket.Data.Migrations
                     BestSellers = table.Column<int>(type: "int", nullable: false),
                     HomeFlag = table.Column<int>(type: "int", nullable: false),
                     Active = table.Column<int>(type: "int", nullable: false, defaultValue: 1),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Video = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                  
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Tags = table.Column<string>(type: "nvarchar(max)", nullable: false),
