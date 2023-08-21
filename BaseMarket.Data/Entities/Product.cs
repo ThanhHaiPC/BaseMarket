@@ -17,9 +17,7 @@ namespace BaseMarket.Data.Entities
         public int Discount { get; set; }
         public BestSellers BestSellers { get; set; }
         public HomeFlag HomeFlag { get; set; }
-        public Active Active { get; set; }
-        public string Image { get; set; }
-        public string Video { get; set; }
+        public Active Active { get; set; }    
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
         public string Tags { get; set; }

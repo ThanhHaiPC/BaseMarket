@@ -221,6 +221,8 @@ namespace BaseMarket.Data.Migrations
 
                     b.HasIndex("AttributeID");
 
+                    b.HasIndex("ProductID");
+
                     b.ToTable("AttributesPrices", (string)null);
                 });
 
@@ -417,7 +419,17 @@ namespace BaseMarket.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TransactStatusID")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("OrderID");
+
+                    b.HasIndex("TransactStatusID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Order", (string)null);
                 });
@@ -631,10 +643,6 @@ namespace BaseMarket.Data.Migrations
                     b.Property<int>("HomeFlag")
                         .HasColumnType("int");
 
-                    b.Property<string>("Image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("MetaDes")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -673,10 +681,6 @@ namespace BaseMarket.Data.Migrations
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Video")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ProductID");
 
@@ -935,18 +939,26 @@ namespace BaseMarket.Data.Migrations
             modelBuilder.Entity("BaseMarket.Data.Entities.AttributesPrices", b =>
                 {
                     b.HasOne("BaseMarket.Data.Entities.Attributes", "Attributes")
-                        .WithMany()
+                        .WithMany("AttributesPrices")
                         .HasForeignKey("AttributeID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BaseMarket.Data.Entities.Product", "Product")
+                        .WithMany("AttributesPrices")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Attributes");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("BaseMarket.Data.Entities.Comment", b =>
                 {
                     b.HasOne("BaseMarket.Data.Entities.Posts", "Posts")
-                        .WithMany()
+                        .WithMany("Comment")
                         .HasForeignKey("PostID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -960,6 +972,25 @@ namespace BaseMarket.Data.Migrations
                     b.Navigation("AppUser");
 
                     b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("BaseMarket.Data.Entities.Order", b =>
+                {
+                    b.HasOne("BaseMarket.Data.Entities.TransactStatus", "TransactStatus")
+                        .WithMany()
+                        .HasForeignKey("TransactStatusID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BaseMarket.Data.Entities.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("TransactStatus");
                 });
 
             modelBuilder.Entity("BaseMarket.Data.Entities.OrderDetail", b =>
@@ -1003,9 +1034,9 @@ namespace BaseMarket.Data.Migrations
             modelBuilder.Entity("BaseMarket.Data.Entities.Rating", b =>
                 {
                     b.HasOne("BaseMarket.Data.Entities.Product", "Product")
-                        .WithMany()
+                        .WithMany("Ratings")
                         .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("BaseMarket.Data.Entities.AppUser", "AppUser")
@@ -1026,6 +1057,11 @@ namespace BaseMarket.Data.Migrations
                     b.Navigation("Ratings");
                 });
 
+            modelBuilder.Entity("BaseMarket.Data.Entities.Attributes", b =>
+                {
+                    b.Navigation("AttributesPrices");
+                });
+
             modelBuilder.Entity("BaseMarket.Data.Entities.Category", b =>
                 {
                     b.Navigation("ProductInCategories");
@@ -1036,11 +1072,20 @@ namespace BaseMarket.Data.Migrations
                     b.Navigation("OrderDetails");
                 });
 
+            modelBuilder.Entity("BaseMarket.Data.Entities.Posts", b =>
+                {
+                    b.Navigation("Comment");
+                });
+
             modelBuilder.Entity("BaseMarket.Data.Entities.Product", b =>
                 {
+                    b.Navigation("AttributesPrices");
+
                     b.Navigation("OrderDetails");
 
                     b.Navigation("ProductInCategories");
+
+                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }
