@@ -46,8 +46,6 @@ namespace BaseMarket.Application.Catalog.Products
                     BestSellers = x.p.BestSellers,
                     Active = x.p.Active,
                     HomeFlag = x.p.HomeFlag,
-                    Image = x.p.Image,
-                    Video = x.p.Video,
                     UpdateDate = x.p.UpdateDate,
                     CreateDate = x.p.CreateDate,
                     Alias = x.p.Alias,
