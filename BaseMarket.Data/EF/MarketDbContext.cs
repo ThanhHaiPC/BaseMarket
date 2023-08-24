@@ -32,6 +32,8 @@ namespace BaseMarket.Data.EF
 
             modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
 
+            modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
+
             modelBuilder.ApplyConfiguration(new AttributesConfiguration());
 
             modelBuilder.ApplyConfiguration(new AttributesPricesConfiguration());

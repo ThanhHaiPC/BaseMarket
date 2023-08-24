@@ -33,8 +33,7 @@ namespace BaseMarket.Application.Catalog.Products
                 HomeFlag = request.HomeFlag,
                 BestSellers = request.BestSellers,
                 Active = request.Active,
-                Image = request.Image,
-                Video = request.Video,
+               
                 Tags = request.Tags,
                 Title = request.Title,
                 Alias = request.Alias,
@@ -94,8 +93,7 @@ namespace BaseMarket.Application.Catalog.Products
                     BestSellers = x .p.BestSellers,
                     Active = x .p.Active,
                     HomeFlag = x .p.HomeFlag,
-                    Image   = x .p.Image,
-                    Video = x .p.Video, 
+               
                     UpdateDate = x .p.UpdateDate,
                     CreateDate = x .p.CreateDate,
                     Alias = x .p.Alias,
@@ -124,8 +122,7 @@ namespace BaseMarket.Application.Catalog.Products
             product.ProductName= request.ProductName;
             product.Description= request.Description;
             product.ShortDesc = request.ShortDesc;
-            product.Image = request.Image;
-            product.Video = request.Video;
+           
             product.BestSellers = request.BestSellers;
             product.HomeFlag= request.HomeFlag;
             product.Active  =   request.Active;

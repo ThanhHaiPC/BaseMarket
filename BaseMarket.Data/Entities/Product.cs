@@ -31,5 +31,7 @@ namespace BaseMarket.Data.Entities
         public List<OrderDetail> OrderDetails { get; set; }
         public List<AttributesPrices> AttributesPrices { get; set; }
         public List<Rating> Ratings { get; set; }
+
+        public List<ProductImage> ProductImages { get; set; }
     }
 }
