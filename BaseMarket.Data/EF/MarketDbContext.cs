@@ -84,5 +84,6 @@ namespace BaseMarket.Data.EF
         public DbSet<TransactStatus> TransactStatuses { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Pages> Pages { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
     }
 }

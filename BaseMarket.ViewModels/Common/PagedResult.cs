@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseMarket.Application.Dtos
+namespace BaseMarket.ViewModels.Common
 {
     public class PagedResult <T>
     {

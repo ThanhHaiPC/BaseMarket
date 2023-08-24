@@ -1,6 +1,4 @@
-﻿using BaseMarket.Application.Catalog.Products.DTOs;
-using BaseMarket.Application.Catalog.Products.DTOs.Manage;
-using BaseMarket.Application.Dtos;
+﻿using BaseMarket.ViewModels.Dtos;
 using BaseMarket.Data.EF;
 using BaseMarket.Data.Entities;
 using BaseMarket.Utillties.Exceptions;
@@ -11,16 +9,30 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.Net.Http.Headers;
+using BaseMarket.Application.Common;
+using BaseMarket.ViewModels.Catalog.Products.Manage;
+using BaseMarket.ViewModels.Common;
 
-namespace BaseMarket.Application.Catalog.Products
+namespace BaseMarket.ViewModels.Catalog.Products
 {
     public class ManageProductService : IManageProductService
     {
         private readonly MarketDbContext _context;
-        public ManageProductService(MarketDbContext context)
+        private readonly IStorageService _storageService;
+
+        public ManageProductService(MarketDbContext context, IStorageService storageService)
         {
             _context = context;
+            _storageService = storageService;
         }
+
+        public Task<int> AddImages(int ProductID, List<IFormFile> images)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<int> Create(ProductCreateRequest request)
         {
             var product = new Product()
@@ -45,6 +57,28 @@ namespace BaseMarket.Application.Catalog.Products
                 UpdateDate = DateTime.Now,
 
             };
+            //Save Image
+            if(request.ThumbnailImage != null)
+            {
+                var thumbnailImage = await _context.ProductImages.FirstOrDefaultAsync(i=>i.ProductID == request.ProductID);
+                if(thumbnailImage != null)
+                {
+                    thumbnailImage.CreatedDate = DateTime.Now;
+                    thumbnailImage.Path = await this.SaveFile(request.ThumbnailImage);
+                    _context.ProductImages.Update(thumbnailImage);
+
+                }
+                product.ProductImages = new List<ProductImage>()
+                {
+                    
+                    new ProductImage()
+                    {
+                        CreatedDate = DateTime.Now,
+                        Path =await this.SaveFile(request.ThumbnailImage),
+
+                    }
+                };
+            }
             _context.Products.Add(product);
             return await _context.SaveChangesAsync();
         }
@@ -53,6 +87,11 @@ namespace BaseMarket.Application.Catalog.Products
         {
             var product = await _context.Products.FindAsync(ProductID);
             if (product == null) throw new BaseMarketException($"Cannot find a product: {ProductID}");
+            var images =  _context.ProductImages.Where(i => i.ProductID == ProductID);
+            foreach (var image in images)
+            {
+                _storageService.DeleteFileAsync(image.Path);
+            }
             _context.Products.Remove(product);
             return await _context.SaveChangesAsync();
         }
@@ -115,6 +154,16 @@ namespace BaseMarket.Application.Catalog.Products
          
         }
 
+        public Task<List<ProductImageViewModel>> GetListImage(int ProductID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> RemoveImages(int ImageId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<int> Update(ProductUpdateRequest request)
         {
             var product = await _context.Products.FindAsync(request.ProductID);
@@ -135,6 +184,11 @@ namespace BaseMarket.Application.Catalog.Products
             return await _context.SaveChangesAsync();
         }
 
+        public Task<int> UpdateImages(int ImageId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> UpdatePrice(int ProductID, int Price)
         {
             var product = await _context.Products.FindAsync(ProductID);
@@ -149,6 +203,13 @@ namespace BaseMarket.Application.Catalog.Products
             if (product == null) throw new BaseMarketException($"Cannot find a product with id :{ProductID}");
             product.UnitStock += Quantity;
             return await _context.SaveChangesAsync() > 0;
+        }
+        private async Task<string> SaveFile(IFormFile file)
+        {
+            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            var fileName=$"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
+            await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
+            return fileName;
         }
     }
 }

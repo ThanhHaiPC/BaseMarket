@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,13 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-	  <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BaseMarket.Data\BaseMarket.Data.csproj" />
-    <ProjectReference Include="..\BaseMarket.Utillties\BaseMarket.Utillties.csproj" />
-    <ProjectReference Include="..\BaseMarket.ViewModels\BaseMarket.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

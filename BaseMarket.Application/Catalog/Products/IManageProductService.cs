@@ -1,13 +1,13 @@
-﻿using BaseMarket.Application.Catalog.Products.DTOs;
-using BaseMarket.Application.Catalog.Products.DTOs.Manage;
-using BaseMarket.Application.Dtos;
+﻿using BaseMarket.ViewModels.Catalog.Products.Manage;
+using BaseMarket.ViewModels.Common;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseMarket.Application.Catalog.Products
+namespace BaseMarket.ViewModels.Catalog.Products
 {
     public interface IManageProductService
     {
@@ -18,5 +18,9 @@ namespace BaseMarket.Application.Catalog.Products
         Task<bool> UpdateUnitStock(int ProductID, int Quantity);
 
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request);
+        Task<int> AddImages(int ProductID, List <IFormFile> images);
+        Task<int> RemoveImages(int ImageId);
+        Task<int> UpdateImages(int ImageId);
+        Task<List<ProductImageViewModel>> GetListImage(int ProductID);
     }
 }

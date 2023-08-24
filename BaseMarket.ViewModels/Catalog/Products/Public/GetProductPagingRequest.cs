@@ -1,11 +1,11 @@
-﻿using BaseMarket.Application.Dtos;
+﻿using BaseMarket.ViewModels.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseMarket.Application.Catalog.Products.DTOs.Public
+namespace BaseMarket.ViewModels.Catalog.Products.DTOs.Public
 {
     public class GetProductPagingRequest: PagingRequestBase
     {

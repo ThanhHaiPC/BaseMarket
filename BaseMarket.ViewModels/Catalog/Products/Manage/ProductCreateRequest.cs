@@ -1,13 +1,14 @@
 ﻿using BaseMarket.Data.Enum;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseMarket.Application.Catalog.Products.DTOs
+namespace BaseMarket.ViewModels.Catalog.Products.Manage
 {
-    public class ProductViewModel
+    public class ProductCreateRequest
     {
         public int ProductID { get; set; }
         public string ProductName { get; set; }
@@ -29,6 +30,6 @@ namespace BaseMarket.Application.Catalog.Products.DTOs
         public string MetaDes { get; set; }
         public string MetaKey { get; set; }
         public int UnitStock { get; set; }
+        public IFormFile ThumbnailImage { get; set; }
     }
-
 }
