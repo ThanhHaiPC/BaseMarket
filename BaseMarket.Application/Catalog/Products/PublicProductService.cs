@@ -1,4 +1,4 @@
-﻿using BaseMarket.ViewModels.Catalog.Products.DTOs.Public;
+﻿
 using BaseMarket.ViewModels.Dtos;
 using BaseMarket.Data.EF;
 using Microsoft.EntityFrameworkCore;
@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BaseMarket.ViewModels.Common;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace BaseMarket.ViewModels.Catalog.Products
 {
@@ -19,7 +20,38 @@ namespace BaseMarket.ViewModels.Catalog.Products
         {
             _context = context;
         }
-        public async Task<PagedResult<ProductViewModel>> GetAllByCategaryID(GetProductPagingRequest request)
+
+        public async Task<List<ProductViewModel>> GetAll()
+        {
+            var query = from p in _context.Products
+                        join pic in _context.ProductInCategories on p.ProductID equals pic.ProductID
+                        join c in _context.Categories on pic.CategoryID equals c.CategoryID
+                        select new { p, pic, c };
+            var data = await query.Select(x => new ProductViewModel()
+            {
+                ProductID = x.p.ProductID,
+                ProductName = x.p.ProductName,
+                Description = x.p.Description,
+                ShortDesc = x.p.ShortDesc,
+                Price = x.p.Price,
+                Discount = x.p.Discount,
+                BestSellers = x.p.BestSellers,
+                Active = x.p.Active,
+                HomeFlag = x.p.HomeFlag,
+                UpdateDate = x.p.UpdateDate,
+                CreateDate = x.p.CreateDate,
+                Alias = x.p.Alias,
+                Tags = x.p.Tags,
+                Title = x.p.Title,
+                MetaDes = x.p.MetaDes,
+                MetaTitle = x.p.MetaTitle,
+                MetaKey = x.p.MetaKey,
+                UnitStock = x.p.UnitStock,
+            }).ToListAsync();
+            return data;
+        }
+
+        public async Task<PagedResult<ProductViewModel>> GetAllByCategaryID(GetPublicProductPagingRequest request)
         {
             // select join
             var query = from p in _context.Products

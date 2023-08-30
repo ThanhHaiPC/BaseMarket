@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http.Headers;
 using BaseMarket.Application.Common;
-using BaseMarket.ViewModels.Catalog.Products.Manage;
 using BaseMarket.ViewModels.Common;
 
 namespace BaseMarket.ViewModels.Catalog.Products
@@ -101,7 +100,7 @@ namespace BaseMarket.ViewModels.Catalog.Products
             throw new NotImplementedException();
         }
 
-        public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request)
+        public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request)
         {
             // select join
             var query = from p in _context.Products
