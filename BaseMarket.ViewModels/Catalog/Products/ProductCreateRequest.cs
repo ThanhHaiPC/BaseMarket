@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseMarket.ViewModels.Catalog.Products.Manage
+namespace BaseMarket.ViewModels.Catalog.Products
 {
     public class ProductCreateRequest
     {

@@ -1,4 +1,4 @@
-﻿using BaseMarket.ViewModels.Catalog.Products.DTOs.Public;
+﻿
 using BaseMarket.ViewModels.Common;
 using BaseMarket.ViewModels.Dtos;
 using System;
@@ -11,6 +11,7 @@ namespace BaseMarket.ViewModels.Catalog.Products
 {
     public interface IPublicProductService
     {
-        Task <PagedResult<ProductViewModel>> GetAllByCategaryID(GetProductPagingRequest request);
+        Task <PagedResult<ProductViewModel>> GetAllByCategaryID(GetPublicProductPagingRequest request);
+        Task <List<ProductViewModel>>GetAll();
     }
 }

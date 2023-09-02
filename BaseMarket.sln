@@ -16,7 +16,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseMarket.Application", "B
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseMarket.Utillties", "BaseMarket.Utillties\BaseMarket.Utillties.csproj", "{9CD40EF3-F074-4A6A-813D-9F42C022F4DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseMarket.ViewModels", "BaseMarket.ViewModels\BaseMarket.ViewModels.csproj", "{D6E2670D-2DEA-41F7-967A-734B0AFD88A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BaseMarket.ViewModels", "BaseMarket.ViewModels\BaseMarket.ViewModels.csproj", "{D6E2670D-2DEA-41F7-967A-734B0AFD88A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BaseMarket.BackEndApi", "BaseMarket.BackEndApi\BaseMarket.BackEndApi.csproj", "{96D2517F-CE31-44FA-8DB4-0AA994608C29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{D6E2670D-2DEA-41F7-967A-734B0AFD88A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6E2670D-2DEA-41F7-967A-734B0AFD88A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6E2670D-2DEA-41F7-967A-734B0AFD88A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D2517F-CE31-44FA-8DB4-0AA994608C29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D2517F-CE31-44FA-8DB4-0AA994608C29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D2517F-CE31-44FA-8DB4-0AA994608C29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D2517F-CE31-44FA-8DB4-0AA994608C29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
